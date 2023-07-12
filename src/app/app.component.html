@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<form #numericForm="ngForm"  novalidate>
+<h2 class="form-check">Welcome to {{title}}</h2>
+<div class="m-5 d-grid gap-3">
+<div class="p-2 bg-light form-group">
+  <label class="form-label">Enter Valid Roman Letter</label>
+  <input type="text" required pattern="^M{0,3}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$" #name="ngModel" [ngClass]="{'is-invalid':name.invalid && name.touched}" class="form-control"
+  name="romNumber"[(ngModel)]="romanModel.rValue">
+  
+  <div *ngIf="name.errors && (name.invalid || name.touched)">
+  <div [class.d-none]="name.untouched">
+  <small class="text-danger" *ngIf="name.errors['required']">Roman Value is Required</small>
+  <small class="text-danger" *ngIf="name.errors['pattern']">Invalid Value</small>
+  <h1></h1>
+  </div>
+  </div>  
+  <!-- ngclass and class both will get displyed. -->
+  <!-- [class.is-invalid]="name.invalid && name.touched"  -->
+</div>
+<button [disabled]="numericForm.form.invalid" (click)="submit(name.value)" class="btn btn-primary">Submit</button>
+</div>
+<!-- <button (click)="startTime()">Answer</button> -->
+<!-- <div [class]="startTime" class="ml-5">
+  {{answer}} -->
+  <!-- <span class="closebtn" onclick="this.parentElement.style.display='none';">
+    &times;
+    {{answer}}
+  </span>  -->
+<!-- </div> -->
+</form>
